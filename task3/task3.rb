@@ -10,7 +10,7 @@
 # end 
 # p conver_to_hash
 
-
+#1.1
 def movie_hash(file_name: "movies.txt")
   review_file = File.open(file_name) # open file
   lines = review_file.readlines  # divide into lines
@@ -39,7 +39,7 @@ def longest_movies(movies, num)
   sort_movie.last(num) # all sorted items. take the latter el by the number of arguments
 end 
 
-#2
+#2.2
 def sort_by_release_date(movies)
   #call the function passed in the argument, "sort_by" enumerable  
   movies.sort_by do |el| 
@@ -48,17 +48,16 @@ def sort_by_release_date(movies)
   end
 end
 
-def select_by_genre(movies, genre)
+def select_by_genre(movies, genre) 
   if genre == nil
     movies
   else 
     movies.filter do |el|
+      # get an array
       el["genre"].split(",").include?(genre)
     end 
   end  
 end
-
-
 
 def select_movies(movies, genre = nil, num = 1)
   movies
@@ -67,23 +66,29 @@ def select_movies(movies, genre = nil, num = 1)
   .then {|movies| movies.first(num)}
 end
 
-#3
+#2.3
 def get_directors(movies)
   movies.reduce([]) do |acc, el|  
     elem = el["directors"].split(" ").last
     acc.push(elem)
+    # sort alphabetically without repeats
     acc.uniq.sort! { |a, b| a <=> b }
   end
 end
 
+#2.4
+def get_country(movies, country)
+  movies.reject do |el| 
+    el["country"].split(" ").include?(country)
+  end
+end
 
+# get_country(movie_hash, "USA")
 # p getting_directors(movie_hash)
 
 # sort_by_release_date(movie_hash)
 # select_movies(movie_hash, "Comedy", 10)
-p select_by_genre(movie_hash, "C")
+#  select_by_genre(movie_hash, "Comedy")
 
 # longest_movies(movie_hash, 5)
 
-# arr = ["comedy, art, film"]
-# arr.join(",").include?("c")
