@@ -31,6 +31,7 @@ end
 #   end 
 # end 
 
+#2.1
 def longest_movies(movies, num) 
   sort_movie = movies.sort_by do |el| #call the function passed in the argument, "sort_by" enumerable  
     el["time"].to_i # take an element with a key "time" and make a number out of it
@@ -38,31 +39,36 @@ def longest_movies(movies, num)
   sort_movie.last(num) # all sorted items. take the latter el by the number of arguments
 end 
 
-
+#2
 def sort_by_release_date(movies)
-  movies.sort_by do |el|  #call the function passed in the argument, "sort_by" enumerable  
-    el["date"].to_i  # take an element with a key "date" and make a number out of it
+  #call the function passed in the argument, "sort_by" enumerable  
+  movies.sort_by do |el| 
+    # take an element with a key "date" and make a number out of it 
+    el["date"].to_i  
   end
 end
 
-
-def comedy_movies(movies)
-  movies.reduce([]) do |acc, el|
-    if el["genre"].include?("Comedy") # Does the item with the key "genre" have the word "comedy"?
-      acc.push(el) # if yes, push in acc
+def select_by_genre(movies, genre)
+  if genre == nil
+    movies
+  else 
+    movies.filter do |el|
+      el["genre"].split(",").include?(genre)
     end 
-    acc
   end  
 end
 
-def comedy_movies_sort_by_date_realease(movies, num)
-  first_ten_movies = sort_by_release_date(movies).yield_self {|movies| comedy_movies(movies).first(num)} # use it as a series of function calls, return the final result
-  first_ten_movies
+
+
+def select_movies(movies, genre = nil, num = 1)
+  movies
+  .then {|movies| select_by_genre(movies, genre)}
+  .then {|movies| sort_by_release_date(movies)}
+  .then {|movies| movies.first(num)}
 end
 
-
-
-def getting_directors(movies)
+#3
+def get_directors(movies)
   movies.reduce([]) do |acc, el|  
     elem = el["directors"].split(" ").last
     acc.push(elem)
@@ -71,13 +77,13 @@ def getting_directors(movies)
 end
 
 
-p getting_directors(movie_hash)
-
-# p comedy_movies_sort_by_date_realease(movie_hash, 10)
+# p getting_directors(movie_hash)
 
 # sort_by_release_date(movie_hash)
-
-# comedy_movies(movie_hash)
+# select_movies(movie_hash, "Comedy", 10)
+p select_by_genre(movie_hash, "C")
 
 # longest_movies(movie_hash, 5)
 
+# arr = ["comedy, art, film"]
+# arr.join(",").include?("c")
