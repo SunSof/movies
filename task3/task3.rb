@@ -76,26 +76,28 @@ def get_directors(movies)
   end
 end
 
-#2.4  посчитать количество  
+#2.4    
 def get_country(movies, country)
-  movies.reject do |el| 
-    el["country"].split(" ").include?(country)
-  end
+  movies
+    .reject do |el| 
+      el["country"].split(" ").include?(country)
+    end
+    .count
 end
 
-#3 сделать палочку вместо запятой 
+#3 
 def get_output(movies)
   movies.map do |el|
     title = el["title"]
     date = el["date"]
-    genre = el["genre"]
+    genre = el["genre"].gsub(",","/")
     time = el["time"]
     "#{title} (#{date}; #{genre}) - #{time}"
     end   
 end
 
-# get_output(movie_hash)
-p  get_country(movie_hash, "USA")
+#  get_output(movie_hash)
+#  get_country(movie_hash, "USA")
 # p getting_directors(movie_hash)
 
 # sort_by_release_date(movie_hash)
