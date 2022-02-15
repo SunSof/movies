@@ -14,7 +14,7 @@
 def movie_hash(file_name: "movies.txt")
   review_file = File.open(file_name) # open file
   lines = review_file.readlines  # divide into lines
-  lines.reduce([]) do |acc, el|  
+  lines.reduce([]) do |acc, el| 
      words = el.split('|') # split words in the line
      hash_keys = ["links", "title", "year", "country", "date", "genre", "time", "rating", "directors", "actors"] # create array of keys
      hash = hash_keys.zip(words).to_h # method "zip" concatenate arrays, "to_hash" make hash    
@@ -22,6 +22,8 @@ def movie_hash(file_name: "movies.txt")
      acc
   end
 end 
+
+# movie_hash(file_name: "movies.txt")
 
 # def find_max_num
 #   convert_to_hash.reduce([]) do |acc,el| 
