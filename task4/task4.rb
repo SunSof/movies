@@ -1,6 +1,6 @@
 require 'csv'
 
-def movie_hash (file_name: "movies.txt")
+def movie_hash(file_name: "movies.txt")
   review_file = CSV.read(file_name)
   arr = []
   CSV.foreach("movies.txt") do |row|
