@@ -13,13 +13,8 @@ require 'csv'
 # end
 
 def movie_hash(file_name: "movies.txt")
-  arr = []
-  words = CSV.parse(File.read(file_name), col_sep: "|")
   hash_keys = ["links", "title", "year", "country", "date", "genre", "time", "rating", "directors", "actors"]
-  words.each do |word|
-  arr.push( hash_keys.zip(word).to_h)
-  end
-  arr   
+  CSV.parse(File.read(file_name), col_sep: "|", headers:hash_keys).map(&:to_h)   
 end
 
 p movie_hash(file_name: "movies.txt")
