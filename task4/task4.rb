@@ -86,12 +86,10 @@ def statistic_movies_per_month(movies)
     data = Date.new(year, month, day)
     data.month
   end
-  statistic_key = { 1 => 'January', 2 => 'February', 3 => 'March', 4 => 'April', 5 => 'May', 6 => 'June', 7 => 'July',
-                    8 => 'August', 9 => 'September', 10 => 'October', 11 => 'November', 12 => 'December' }
-  x = months.sort.each_with_object(Hash.new(0)) do |element, hash|
-    hash[element] += 1
+  months_hash = { 1 => 'January', 2 => 'February', 3 => 'March', 4 => 'April', 5 => 'May', 6 => 'June', 7 => 'July',
+                  8 => 'August', 9 => 'September', 10 => 'October', 11 => 'November', 12 => 'December' }
+  months.sort.each_with_object(Hash.new(0)) do |element, hash|
+    month = months_hash[element]
+    hash[month] = hash[month] + 1
   end
-  x.transform_keys(&statistic_key)
 end
-
-statistic_movies_per_month(data)
