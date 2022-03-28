@@ -1,5 +1,6 @@
 require 'csv'
 require 'ostruct'
+require 'date'
 
 # 4.1
 def movie_hash(file_name: 'movies.txt')
@@ -72,5 +73,23 @@ def get_output(movies)
     genre = el.genre.gsub(',', '/')
     time = el.time
     "#{title} (#{date}; #{genre}) - #{time}"
+  end
+end
+
+# 4.3
+def statistic_movies_per_month(movies)
+  months = movies.map do |el|
+    date_in_arr = el.date.scan(/\d+/)
+    year = date_in_arr[0].to_i
+    month = (date_in_arr[1] || '01').to_i
+    day =  (date_in_arr[2] || '01').to_i
+    data = Date.new(year, month, day)
+    data.month
+  end
+  months_hash = { 1 => 'January', 2 => 'February', 3 => 'March', 4 => 'April', 5 => 'May', 6 => 'June', 7 => 'July',
+                  8 => 'August', 9 => 'September', 10 => 'October', 11 => 'November', 12 => 'December' }
+  months.sort.each_with_object(Hash.new(0)) do |element, hash|
+    month = months_hash[element]
+    hash[month] = hash[month] + 1
   end
 end
