@@ -29,7 +29,6 @@ class MovieCollection
   end
 
   def initialize(file_name)
-    @file_name = file_name
     @collection = movies_parse(file_name)
   end
 
@@ -39,7 +38,6 @@ class MovieCollection
 
   def movie_sort(field)
     return raise 'Wrong argument' unless all[0].respond_to?(field)
-
     all.sort_by { |el|  el.send(field) }
   end
 
@@ -50,5 +48,5 @@ class MovieCollection
 end
 
 movie_collection = MovieCollection.new('movies.txt')
-# p movie_collection.movie_sort(:date)
+ p movie_collection.movie_sort(:date)
 # movie_collection.movie_filter(genre: "Comedy")
