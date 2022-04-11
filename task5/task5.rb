@@ -1,8 +1,7 @@
 require 'csv'
 
 class Movie
-  attr_accessor :links, :title, :year, :country, :date, :genre, :time, :rating, :directors, :actors
-
+  attr_accessor :date
   def initialize(hash)
     @links = hash[:links]
     @title = hash[:title]
@@ -18,7 +17,7 @@ class Movie
 end
 
 class MovieCollection
-  attr_accessor :file_name, :colection
+  attr_accessor :colection
 
   def movies_parse(file_name)
     hash_keys = %w[links title year country date genre time rating directors actors]
@@ -39,7 +38,7 @@ class MovieCollection
 
   def movie_sort(field)
     return raise 'Wrong argument' unless all[0].respond_to?(field)
-    all.sort_by { |el| el.send(field) }
+    all.sort_by { |el|  el.send(field) }
   end
 
   # def movie_filter(fild)
@@ -49,5 +48,5 @@ class MovieCollection
 end
 
 movie_collection = MovieCollection.new('movies.txt')
-# movie_collection.movie_sort(:date)
+# p movie_collection.movie_sort(:date)
 # movie_collection.movie_filter(genre: "Comedy")
