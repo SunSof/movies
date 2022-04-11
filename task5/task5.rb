@@ -38,11 +38,8 @@ class MovieCollection
   end
 
   def movie_sort(field)
-    all.sort_by do |el|
-      return puts 'Wrong argument' unless
-          el.respond_to?(field)
-          el.send(field)
-    end
+    return raise 'Wrong argument' unless all[0].respond_to?(field)
+    all.sort_by { |el| el.send(field) }
   end
 
   # def movie_filter(fild)
@@ -52,5 +49,5 @@ class MovieCollection
 end
 
 movie_collection = MovieCollection.new('movies.txt')
-movie_collection.movie_sort(:ass)
+# movie_collection.movie_sort(:date)
 # movie_collection.movie_filter(genre: "Comedy")
