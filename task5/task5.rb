@@ -1,7 +1,8 @@
 require 'csv'
 
 class Movie
-  attr_accessor :date
+  attr_reader :links, :title, :year, :country, :date, :genre, :time, :rating, :directors, :actors
+
   def initialize(hash)
     @links = hash[:links]
     @title = hash[:title]
@@ -38,6 +39,7 @@ class MovieCollection
 
   def movie_sort(field)
     return raise 'Wrong argument' unless all[0].respond_to?(field)
+
     all.sort_by { |el|  el.send(field) }
   end
 
