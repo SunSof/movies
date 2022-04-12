@@ -64,8 +64,3 @@ def bibi
                    { name: 'chamomile', color: 'white,yellow' }]
   flowers_array.map { |hash| Flowers.new(hash) }
 end
-
-def filtr(h)
-  bibi.filter { |_el| p h }
-end
-filtr(color: 'yellow')

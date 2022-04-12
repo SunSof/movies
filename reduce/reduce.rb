@@ -1,14 +1,14 @@
-def task1(word)
+def letter_count(word)
   y = Hash.new(0)
-  word.split("").each do |letter| 
-    y[letter] += 1 
+  word.split('').each do |letter|
+    y[letter] += 1
   end
   y
 end
 
-def task2(word)
-  y = Hash.new 
-  word.split("").each do |letter| 
+def letter_count_with_if(word)
+  y = {}
+  word.split('').each do |letter|
     if y[letter]
       y[letter] += 1
     else
@@ -19,15 +19,10 @@ def task2(word)
 end
 # {:a => 1} {a: 1}
 
-
-def task3(word)
-  word.split("").reduce(Hash.new(0)){ |acc, el| acc[el] += 1; acc}
+def letter_count_with_reduce(word)
+  word.split('').each_with_object(Hash.new(0)) do |el, acc|
+    acc[el] += 1
+  end
 end
 
-p task3("pupa") 
-# arr = [1,2,3]
-
-# arr[1] = 4 
-
-# hash = {a:1, b:2}
-# hash[b] = 3
+# letter_count_with_reduce("pupa")
