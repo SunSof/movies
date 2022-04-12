@@ -1,14 +1,17 @@
+# use of libraries
 require 'csv'
 require 'ostruct'
 require 'date'
 
 # 4.1
+# CSV - work with strings, available separating
 def movie_hash(file_name: 'movies.txt')
   hash_keys = %w[links title year country date genre time rating directors actors]
   CSV.parse(File.read(file_name), col_sep: '|', headers: hash_keys).map(&:to_h)
 end
 
 # 4.2
+# OpenStruct -  structure, similar to a Hash, that allows the definition of arbitrary attributes with their accompanying values. Easy access for sorting and filtering,
 def film_collection(movies)
   movies.map { |row| OpenStruct.new(row) }
 end
@@ -77,6 +80,7 @@ def get_output(movies)
 end
 
 # 4.3
+# Date - for easy work with dates.
 def statistic_movies_per_month(movies)
   months = movies.map do |el|
     date_in_arr = el.date.scan(/\d+/)
