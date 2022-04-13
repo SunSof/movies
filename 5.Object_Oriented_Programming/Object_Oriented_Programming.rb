@@ -15,6 +15,11 @@ class Movie
     @directors = hash[:directors]
     @actors = hash[:actors]
   end
+
+  # 5.3.2
+  def has_genre?(field)
+    @genre.include?(field)
+  end
 end
 
 class MovieCollection
@@ -68,6 +73,8 @@ class MovieCollection
 end
 
 movie_collection = MovieCollection.new('movies.txt')
+first_film = movie_collection.all.first
+# p first_film.has_genre?("Comedy")
 # p movie_collection.movie_sort(:date)
 # p movie_collection.movie_filter(genre: "Comedy")
 # p movie_collection.movie_stats(:year)
