@@ -94,6 +94,7 @@ def statistic_movies_per_month(movies)
                   8 => 'August', 9 => 'September', 10 => 'October', 11 => 'November', 12 => 'December' }
   months.sort.each_with_object(Hash.new(0)) do |element, hash|
     month = months_hash[element]
+    # appropriation
     hash[month] = hash[month] + 1
   end
 end
