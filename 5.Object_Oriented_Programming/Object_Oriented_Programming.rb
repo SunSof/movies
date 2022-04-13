@@ -58,12 +58,12 @@ class MovieCollection
 
   # 5.2.5
   def movie_stats(field)
-    hash = Hash.new(0)
     return raise 'Wrong argument' unless all[0].respond_to?(field)
-    all.map do |el|
-      hash[el.send(field)] += 1
+
+    all.each_with_object(Hash.new(0)) do |el, acc|
+      str_value = el.send(field)
+      acc[str_value] += 1
     end
-    hash
   end
 end
 
